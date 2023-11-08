@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
+        Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show();
         runTimer();
     }
 
@@ -35,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putInt("seconds", seconds);
         savedInstanceState.putBoolean("running", running);
         savedInstanceState.getBoolean("wasRunning", wasRunning);
+        Toast.makeText(this, "onSaveInstanceState", Toast.LENGTH_SHORT).show();
     }
 
     protected void onPause(){
         super.onPause();
         wasRunning = running;
         running =false;
+        //Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
     }
 
     protected void onResume(){
@@ -48,19 +52,23 @@ public class MainActivity extends AppCompatActivity {
         if (wasRunning) {
             running = true;
         }
+        //Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
     }
 
     public void onClickStart(View view){
         running = true;
+        Toast.makeText(this, "onClickStart", Toast.LENGTH_SHORT).show();
     }
 
     public void onClickStop(View view){
         running = false;
+        Toast.makeText(this, "onClickStop", Toast.LENGTH_SHORT).show();
     }
 
     public void onClickReset(View view){
         running = false;
         seconds = 0;
+        Toast.makeText(this, "onClickReset", Toast.LENGTH_SHORT).show();
     }
 
     public void runTimer() {
@@ -82,5 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(this,1000);
             }
         });
+        Toast.makeText(this, "runTimer", Toast.LENGTH_SHORT).show();
     }
 }
